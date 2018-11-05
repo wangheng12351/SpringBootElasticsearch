@@ -1,0 +1,1599 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.home.open.dao.AccountdetailinfoMapper">
+  <resultMap id="BaseResultMap" type="org.home.open.bean.Accountdetailinfo">
+    <id column="Id" jdbcType="BIGINT" property="id" />
+    <result column="UserID" jdbcType="BIGINT" property="userid" />
+    <result column="BankCardID" jdbcType="BIGINT" property="bankcardid" />
+    <result column="SerialNumber" jdbcType="VARCHAR" property="serialnumber" />
+    <result column="ContractID" jdbcType="BIGINT" property="contractid" />
+    <result column="SpendingMoney" jdbcType="DOUBLE" property="spendingmoney" />
+    <result column="DepositedMoney" jdbcType="DOUBLE" property="depositedmoney" />
+    <result column="Balance" jdbcType="DOUBLE" property="balance" />
+    <result column="Memo" jdbcType="VARCHAR" property="memo" />
+    <result column="CreateTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="UpdateTime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="DetailType" jdbcType="BIGINT" property="detailtype" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    Id, UserID, BankCardID, SerialNumber, ContractID, SpendingMoney, DepositedMoney, 
+    Balance, Memo, CreateTime, UpdateTime, DetailType
+  </sql>
+  <select id="selectByExample" parameterType="org.home.open.bean.AccountdetailinfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from accountdetailinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from accountdetailinfo
+    where Id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from accountdetailinfo
+    where Id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.home.open.bean.AccountdetailinfoExample">
+    delete from accountdetailinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.home.open.bean.Accountdetailinfo">
+    insert into accountdetailinfo (Id, UserID, BankCardID, 
+      SerialNumber, ContractID, SpendingMoney, 
+      DepositedMoney, Balance, Memo, 
+      CreateTime, UpdateTime, DetailType
+      )
+    values (#{id,jdbcType=BIGINT}, #{userid,jdbcType=BIGINT}, #{bankcardid,jdbcType=BIGINT}, 
+      #{serialnumber,jdbcType=VARCHAR}, #{contractid,jdbcType=BIGINT}, #{spendingmoney,jdbcType=DOUBLE}, 
+      #{depositedmoney,jdbcType=DOUBLE}, #{balance,jdbcType=DOUBLE}, #{memo,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{detailtype,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.home.open.bean.Accountdetailinfo">
+    insert into accountdetailinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="userid != null">
+        UserID,
+      </if>
+      <if test="bankcardid != null">
+        BankCardID,
+      </if>
+      <if test="serialnumber != null">
+        SerialNumber,
+      </if>
+      <if test="contractid != null">
+        ContractID,
+      </if>
+      <if test="spendingmoney != null">
+        SpendingMoney,
+      </if>
+      <if test="depositedmoney != null">
+        DepositedMoney,
+      </if>
+      <if test="balance != null">
+        Balance,
+      </if>
+      <if test="memo != null">
+        Memo,
+      </if>
+      <if test="createtime != null">
+        CreateTime,
+      </if>
+      <if test="updatetime != null">
+        UpdateTime,
+      </if>
+      <if test="detailtype != null">
+        DetailType,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="bankcardid != null">
+        #{bankcardid,jdbcType=BIGINT},
+      </if>
+      <if test="serialnumber != null">
+        #{serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="contractid != null">
+        #{contractid,jdbcType=BIGINT},
+      </if>
+      <if test="spendingmoney != null">
+        #{spendingmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="depositedmoney != null">
+        #{depositedmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="balance != null">
+        #{balance,jdbcType=DOUBLE},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="detailtype != null">
+        #{detailtype,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.home.open.bean.AccountdetailinfoExample" resultType="java.lang.Long">
+    select count(*) from accountdetailinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update accountdetailinfo
+    <set>
+      <if test="record.id != null">
+        Id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.userid != null">
+        UserID = #{record.userid,jdbcType=BIGINT},
+      </if>
+      <if test="record.bankcardid != null">
+        BankCardID = #{record.bankcardid,jdbcType=BIGINT},
+      </if>
+      <if test="record.serialnumber != null">
+        SerialNumber = #{record.serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractid != null">
+        ContractID = #{record.contractid,jdbcType=BIGINT},
+      </if>
+      <if test="record.spendingmoney != null">
+        SpendingMoney = #{record.spendingmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.depositedmoney != null">
+        DepositedMoney = #{record.depositedmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.balance != null">
+        Balance = #{record.balance,jdbcType=DOUBLE},
+      </if>
+      <if test="record.memo != null">
+        Memo = #{record.memo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatetime != null">
+        UpdateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.detailtype != null">
+        DetailType = #{record.detailtype,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update accountdetailinfo
+    set Id = #{record.id,jdbcType=BIGINT},
+      UserID = #{record.userid,jdbcType=BIGINT},
+      BankCardID = #{record.bankcardid,jdbcType=BIGINT},
+      SerialNumber = #{record.serialnumber,jdbcType=VARCHAR},
+      ContractID = #{record.contractid,jdbcType=BIGINT},
+      SpendingMoney = #{record.spendingmoney,jdbcType=DOUBLE},
+      DepositedMoney = #{record.depositedmoney,jdbcType=DOUBLE},
+      Balance = #{record.balance,jdbcType=DOUBLE},
+      Memo = #{record.memo,jdbcType=VARCHAR},
+      CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      UpdateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      DetailType = #{record.detailtype,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.home.open.bean.Accountdetailinfo">
+    update accountdetailinfo
+    <set>
+      <if test="userid != null">
+        UserID = #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="bankcardid != null">
+        BankCardID = #{bankcardid,jdbcType=BIGINT},
+      </if>
+      <if test="serialnumber != null">
+        SerialNumber = #{serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="contractid != null">
+        ContractID = #{contractid,jdbcType=BIGINT},
+      </if>
+      <if test="spendingmoney != null">
+        SpendingMoney = #{spendingmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="depositedmoney != null">
+        DepositedMoney = #{depositedmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="balance != null">
+        Balance = #{balance,jdbcType=DOUBLE},
+      </if>
+      <if test="memo != null">
+        Memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="detailtype != null">
+        DetailType = #{detailtype,jdbcType=BIGINT},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.home.open.bean.Accountdetailinfo">
+    update accountdetailinfo
+    set UserID = #{userid,jdbcType=BIGINT},
+      BankCardID = #{bankcardid,jdbcType=BIGINT},
+      SerialNumber = #{serialnumber,jdbcType=VARCHAR},
+      ContractID = #{contractid,jdbcType=BIGINT},
+      SpendingMoney = #{spendingmoney,jdbcType=DOUBLE},
+      DepositedMoney = #{depositedmoney,jdbcType=DOUBLE},
+      Balance = #{balance,jdbcType=DOUBLE},
+      Memo = #{memo,jdbcType=VARCHAR},
+      CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+      DetailType = #{detailtype,jdbcType=BIGINT}
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="org.home.open.bean.Accountdetailinfo">
+    <id column="Id" jdbcType="BIGINT" property="id" />
+    <result column="UserID" jdbcType="BIGINT" property="userid" />
+    <result column="BankCardID" jdbcType="BIGINT" property="bankcardid" />
+    <result column="SerialNumber" jdbcType="VARCHAR" property="serialnumber" />
+    <result column="ContractID" jdbcType="BIGINT" property="contractid" />
+    <result column="SpendingMoney" jdbcType="DOUBLE" property="spendingmoney" />
+    <result column="DepositedMoney" jdbcType="DOUBLE" property="depositedmoney" />
+    <result column="Balance" jdbcType="DOUBLE" property="balance" />
+    <result column="Memo" jdbcType="VARCHAR" property="memo" />
+    <result column="CreateTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="UpdateTime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="DetailType" jdbcType="BIGINT" property="detailtype" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    Id, UserID, BankCardID, SerialNumber, ContractID, SpendingMoney, DepositedMoney, 
+    Balance, Memo, CreateTime, UpdateTime, DetailType
+  </sql>
+  <select id="selectByExample" parameterType="org.home.open.bean.AccountdetailinfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from accountdetailinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from accountdetailinfo
+    where Id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from accountdetailinfo
+    where Id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.home.open.bean.AccountdetailinfoExample">
+    delete from accountdetailinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.home.open.bean.Accountdetailinfo">
+    insert into accountdetailinfo (Id, UserID, BankCardID, 
+      SerialNumber, ContractID, SpendingMoney, 
+      DepositedMoney, Balance, Memo, 
+      CreateTime, UpdateTime, DetailType
+      )
+    values (#{id,jdbcType=BIGINT}, #{userid,jdbcType=BIGINT}, #{bankcardid,jdbcType=BIGINT}, 
+      #{serialnumber,jdbcType=VARCHAR}, #{contractid,jdbcType=BIGINT}, #{spendingmoney,jdbcType=DOUBLE}, 
+      #{depositedmoney,jdbcType=DOUBLE}, #{balance,jdbcType=DOUBLE}, #{memo,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{detailtype,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.home.open.bean.Accountdetailinfo">
+    insert into accountdetailinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="userid != null">
+        UserID,
+      </if>
+      <if test="bankcardid != null">
+        BankCardID,
+      </if>
+      <if test="serialnumber != null">
+        SerialNumber,
+      </if>
+      <if test="contractid != null">
+        ContractID,
+      </if>
+      <if test="spendingmoney != null">
+        SpendingMoney,
+      </if>
+      <if test="depositedmoney != null">
+        DepositedMoney,
+      </if>
+      <if test="balance != null">
+        Balance,
+      </if>
+      <if test="memo != null">
+        Memo,
+      </if>
+      <if test="createtime != null">
+        CreateTime,
+      </if>
+      <if test="updatetime != null">
+        UpdateTime,
+      </if>
+      <if test="detailtype != null">
+        DetailType,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="bankcardid != null">
+        #{bankcardid,jdbcType=BIGINT},
+      </if>
+      <if test="serialnumber != null">
+        #{serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="contractid != null">
+        #{contractid,jdbcType=BIGINT},
+      </if>
+      <if test="spendingmoney != null">
+        #{spendingmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="depositedmoney != null">
+        #{depositedmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="balance != null">
+        #{balance,jdbcType=DOUBLE},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="detailtype != null">
+        #{detailtype,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.home.open.bean.AccountdetailinfoExample" resultType="java.lang.Long">
+    select count(*) from accountdetailinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update accountdetailinfo
+    <set>
+      <if test="record.id != null">
+        Id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.userid != null">
+        UserID = #{record.userid,jdbcType=BIGINT},
+      </if>
+      <if test="record.bankcardid != null">
+        BankCardID = #{record.bankcardid,jdbcType=BIGINT},
+      </if>
+      <if test="record.serialnumber != null">
+        SerialNumber = #{record.serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractid != null">
+        ContractID = #{record.contractid,jdbcType=BIGINT},
+      </if>
+      <if test="record.spendingmoney != null">
+        SpendingMoney = #{record.spendingmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.depositedmoney != null">
+        DepositedMoney = #{record.depositedmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.balance != null">
+        Balance = #{record.balance,jdbcType=DOUBLE},
+      </if>
+      <if test="record.memo != null">
+        Memo = #{record.memo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatetime != null">
+        UpdateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.detailtype != null">
+        DetailType = #{record.detailtype,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update accountdetailinfo
+    set Id = #{record.id,jdbcType=BIGINT},
+      UserID = #{record.userid,jdbcType=BIGINT},
+      BankCardID = #{record.bankcardid,jdbcType=BIGINT},
+      SerialNumber = #{record.serialnumber,jdbcType=VARCHAR},
+      ContractID = #{record.contractid,jdbcType=BIGINT},
+      SpendingMoney = #{record.spendingmoney,jdbcType=DOUBLE},
+      DepositedMoney = #{record.depositedmoney,jdbcType=DOUBLE},
+      Balance = #{record.balance,jdbcType=DOUBLE},
+      Memo = #{record.memo,jdbcType=VARCHAR},
+      CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      UpdateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      DetailType = #{record.detailtype,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.home.open.bean.Accountdetailinfo">
+    update accountdetailinfo
+    <set>
+      <if test="userid != null">
+        UserID = #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="bankcardid != null">
+        BankCardID = #{bankcardid,jdbcType=BIGINT},
+      </if>
+      <if test="serialnumber != null">
+        SerialNumber = #{serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="contractid != null">
+        ContractID = #{contractid,jdbcType=BIGINT},
+      </if>
+      <if test="spendingmoney != null">
+        SpendingMoney = #{spendingmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="depositedmoney != null">
+        DepositedMoney = #{depositedmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="balance != null">
+        Balance = #{balance,jdbcType=DOUBLE},
+      </if>
+      <if test="memo != null">
+        Memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="detailtype != null">
+        DetailType = #{detailtype,jdbcType=BIGINT},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.home.open.bean.Accountdetailinfo">
+    update accountdetailinfo
+    set UserID = #{userid,jdbcType=BIGINT},
+      BankCardID = #{bankcardid,jdbcType=BIGINT},
+      SerialNumber = #{serialnumber,jdbcType=VARCHAR},
+      ContractID = #{contractid,jdbcType=BIGINT},
+      SpendingMoney = #{spendingmoney,jdbcType=DOUBLE},
+      DepositedMoney = #{depositedmoney,jdbcType=DOUBLE},
+      Balance = #{balance,jdbcType=DOUBLE},
+      Memo = #{memo,jdbcType=VARCHAR},
+      CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+      DetailType = #{detailtype,jdbcType=BIGINT}
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="org.home.open.bean.Accountdetailinfo">
+    <id column="Id" jdbcType="BIGINT" property="id" />
+    <result column="UserID" jdbcType="BIGINT" property="userid" />
+    <result column="BankCardID" jdbcType="BIGINT" property="bankcardid" />
+    <result column="SerialNumber" jdbcType="VARCHAR" property="serialnumber" />
+    <result column="ContractID" jdbcType="BIGINT" property="contractid" />
+    <result column="SpendingMoney" jdbcType="DOUBLE" property="spendingmoney" />
+    <result column="DepositedMoney" jdbcType="DOUBLE" property="depositedmoney" />
+    <result column="Balance" jdbcType="DOUBLE" property="balance" />
+    <result column="Memo" jdbcType="VARCHAR" property="memo" />
+    <result column="CreateTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="UpdateTime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="DetailType" jdbcType="BIGINT" property="detailtype" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    Id, UserID, BankCardID, SerialNumber, ContractID, SpendingMoney, DepositedMoney, 
+    Balance, Memo, CreateTime, UpdateTime, DetailType
+  </sql>
+  <select id="selectByExample" parameterType="org.home.open.bean.AccountdetailinfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from accountdetailinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from accountdetailinfo
+    where Id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from accountdetailinfo
+    where Id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.home.open.bean.AccountdetailinfoExample">
+    delete from accountdetailinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.home.open.bean.Accountdetailinfo">
+    insert into accountdetailinfo (Id, UserID, BankCardID, 
+      SerialNumber, ContractID, SpendingMoney, 
+      DepositedMoney, Balance, Memo, 
+      CreateTime, UpdateTime, DetailType
+      )
+    values (#{id,jdbcType=BIGINT}, #{userid,jdbcType=BIGINT}, #{bankcardid,jdbcType=BIGINT}, 
+      #{serialnumber,jdbcType=VARCHAR}, #{contractid,jdbcType=BIGINT}, #{spendingmoney,jdbcType=DOUBLE}, 
+      #{depositedmoney,jdbcType=DOUBLE}, #{balance,jdbcType=DOUBLE}, #{memo,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{detailtype,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.home.open.bean.Accountdetailinfo">
+    insert into accountdetailinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="userid != null">
+        UserID,
+      </if>
+      <if test="bankcardid != null">
+        BankCardID,
+      </if>
+      <if test="serialnumber != null">
+        SerialNumber,
+      </if>
+      <if test="contractid != null">
+        ContractID,
+      </if>
+      <if test="spendingmoney != null">
+        SpendingMoney,
+      </if>
+      <if test="depositedmoney != null">
+        DepositedMoney,
+      </if>
+      <if test="balance != null">
+        Balance,
+      </if>
+      <if test="memo != null">
+        Memo,
+      </if>
+      <if test="createtime != null">
+        CreateTime,
+      </if>
+      <if test="updatetime != null">
+        UpdateTime,
+      </if>
+      <if test="detailtype != null">
+        DetailType,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="bankcardid != null">
+        #{bankcardid,jdbcType=BIGINT},
+      </if>
+      <if test="serialnumber != null">
+        #{serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="contractid != null">
+        #{contractid,jdbcType=BIGINT},
+      </if>
+      <if test="spendingmoney != null">
+        #{spendingmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="depositedmoney != null">
+        #{depositedmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="balance != null">
+        #{balance,jdbcType=DOUBLE},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="detailtype != null">
+        #{detailtype,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.home.open.bean.AccountdetailinfoExample" resultType="java.lang.Long">
+    select count(*) from accountdetailinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update accountdetailinfo
+    <set>
+      <if test="record.id != null">
+        Id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.userid != null">
+        UserID = #{record.userid,jdbcType=BIGINT},
+      </if>
+      <if test="record.bankcardid != null">
+        BankCardID = #{record.bankcardid,jdbcType=BIGINT},
+      </if>
+      <if test="record.serialnumber != null">
+        SerialNumber = #{record.serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractid != null">
+        ContractID = #{record.contractid,jdbcType=BIGINT},
+      </if>
+      <if test="record.spendingmoney != null">
+        SpendingMoney = #{record.spendingmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.depositedmoney != null">
+        DepositedMoney = #{record.depositedmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.balance != null">
+        Balance = #{record.balance,jdbcType=DOUBLE},
+      </if>
+      <if test="record.memo != null">
+        Memo = #{record.memo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatetime != null">
+        UpdateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.detailtype != null">
+        DetailType = #{record.detailtype,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update accountdetailinfo
+    set Id = #{record.id,jdbcType=BIGINT},
+      UserID = #{record.userid,jdbcType=BIGINT},
+      BankCardID = #{record.bankcardid,jdbcType=BIGINT},
+      SerialNumber = #{record.serialnumber,jdbcType=VARCHAR},
+      ContractID = #{record.contractid,jdbcType=BIGINT},
+      SpendingMoney = #{record.spendingmoney,jdbcType=DOUBLE},
+      DepositedMoney = #{record.depositedmoney,jdbcType=DOUBLE},
+      Balance = #{record.balance,jdbcType=DOUBLE},
+      Memo = #{record.memo,jdbcType=VARCHAR},
+      CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      UpdateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      DetailType = #{record.detailtype,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.home.open.bean.Accountdetailinfo">
+    update accountdetailinfo
+    <set>
+      <if test="userid != null">
+        UserID = #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="bankcardid != null">
+        BankCardID = #{bankcardid,jdbcType=BIGINT},
+      </if>
+      <if test="serialnumber != null">
+        SerialNumber = #{serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="contractid != null">
+        ContractID = #{contractid,jdbcType=BIGINT},
+      </if>
+      <if test="spendingmoney != null">
+        SpendingMoney = #{spendingmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="depositedmoney != null">
+        DepositedMoney = #{depositedmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="balance != null">
+        Balance = #{balance,jdbcType=DOUBLE},
+      </if>
+      <if test="memo != null">
+        Memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="detailtype != null">
+        DetailType = #{detailtype,jdbcType=BIGINT},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.home.open.bean.Accountdetailinfo">
+    update accountdetailinfo
+    set UserID = #{userid,jdbcType=BIGINT},
+      BankCardID = #{bankcardid,jdbcType=BIGINT},
+      SerialNumber = #{serialnumber,jdbcType=VARCHAR},
+      ContractID = #{contractid,jdbcType=BIGINT},
+      SpendingMoney = #{spendingmoney,jdbcType=DOUBLE},
+      DepositedMoney = #{depositedmoney,jdbcType=DOUBLE},
+      Balance = #{balance,jdbcType=DOUBLE},
+      Memo = #{memo,jdbcType=VARCHAR},
+      CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+      DetailType = #{detailtype,jdbcType=BIGINT}
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="org.home.open.bean.Accountdetailinfo">
+    <id column="Id" jdbcType="BIGINT" property="id" />
+    <result column="UserID" jdbcType="BIGINT" property="userid" />
+    <result column="BankCardID" jdbcType="BIGINT" property="bankcardid" />
+    <result column="SerialNumber" jdbcType="VARCHAR" property="serialnumber" />
+    <result column="ContractID" jdbcType="BIGINT" property="contractid" />
+    <result column="SpendingMoney" jdbcType="DOUBLE" property="spendingmoney" />
+    <result column="DepositedMoney" jdbcType="DOUBLE" property="depositedmoney" />
+    <result column="Balance" jdbcType="DOUBLE" property="balance" />
+    <result column="Memo" jdbcType="VARCHAR" property="memo" />
+    <result column="CreateTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="UpdateTime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="DetailType" jdbcType="BIGINT" property="detailtype" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    Id, UserID, BankCardID, SerialNumber, ContractID, SpendingMoney, DepositedMoney, 
+    Balance, Memo, CreateTime, UpdateTime, DetailType
+  </sql>
+  <select id="selectByExample" parameterType="org.home.open.bean.AccountdetailinfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from accountdetailinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from accountdetailinfo
+    where Id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from accountdetailinfo
+    where Id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.home.open.bean.AccountdetailinfoExample">
+    delete from accountdetailinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.home.open.bean.Accountdetailinfo">
+    insert into accountdetailinfo (Id, UserID, BankCardID, 
+      SerialNumber, ContractID, SpendingMoney, 
+      DepositedMoney, Balance, Memo, 
+      CreateTime, UpdateTime, DetailType
+      )
+    values (#{id,jdbcType=BIGINT}, #{userid,jdbcType=BIGINT}, #{bankcardid,jdbcType=BIGINT}, 
+      #{serialnumber,jdbcType=VARCHAR}, #{contractid,jdbcType=BIGINT}, #{spendingmoney,jdbcType=DOUBLE}, 
+      #{depositedmoney,jdbcType=DOUBLE}, #{balance,jdbcType=DOUBLE}, #{memo,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{detailtype,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.home.open.bean.Accountdetailinfo">
+    insert into accountdetailinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="userid != null">
+        UserID,
+      </if>
+      <if test="bankcardid != null">
+        BankCardID,
+      </if>
+      <if test="serialnumber != null">
+        SerialNumber,
+      </if>
+      <if test="contractid != null">
+        ContractID,
+      </if>
+      <if test="spendingmoney != null">
+        SpendingMoney,
+      </if>
+      <if test="depositedmoney != null">
+        DepositedMoney,
+      </if>
+      <if test="balance != null">
+        Balance,
+      </if>
+      <if test="memo != null">
+        Memo,
+      </if>
+      <if test="createtime != null">
+        CreateTime,
+      </if>
+      <if test="updatetime != null">
+        UpdateTime,
+      </if>
+      <if test="detailtype != null">
+        DetailType,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="bankcardid != null">
+        #{bankcardid,jdbcType=BIGINT},
+      </if>
+      <if test="serialnumber != null">
+        #{serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="contractid != null">
+        #{contractid,jdbcType=BIGINT},
+      </if>
+      <if test="spendingmoney != null">
+        #{spendingmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="depositedmoney != null">
+        #{depositedmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="balance != null">
+        #{balance,jdbcType=DOUBLE},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="detailtype != null">
+        #{detailtype,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.home.open.bean.AccountdetailinfoExample" resultType="java.lang.Long">
+    select count(*) from accountdetailinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update accountdetailinfo
+    <set>
+      <if test="record.id != null">
+        Id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.userid != null">
+        UserID = #{record.userid,jdbcType=BIGINT},
+      </if>
+      <if test="record.bankcardid != null">
+        BankCardID = #{record.bankcardid,jdbcType=BIGINT},
+      </if>
+      <if test="record.serialnumber != null">
+        SerialNumber = #{record.serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractid != null">
+        ContractID = #{record.contractid,jdbcType=BIGINT},
+      </if>
+      <if test="record.spendingmoney != null">
+        SpendingMoney = #{record.spendingmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.depositedmoney != null">
+        DepositedMoney = #{record.depositedmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.balance != null">
+        Balance = #{record.balance,jdbcType=DOUBLE},
+      </if>
+      <if test="record.memo != null">
+        Memo = #{record.memo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatetime != null">
+        UpdateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.detailtype != null">
+        DetailType = #{record.detailtype,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update accountdetailinfo
+    set Id = #{record.id,jdbcType=BIGINT},
+      UserID = #{record.userid,jdbcType=BIGINT},
+      BankCardID = #{record.bankcardid,jdbcType=BIGINT},
+      SerialNumber = #{record.serialnumber,jdbcType=VARCHAR},
+      ContractID = #{record.contractid,jdbcType=BIGINT},
+      SpendingMoney = #{record.spendingmoney,jdbcType=DOUBLE},
+      DepositedMoney = #{record.depositedmoney,jdbcType=DOUBLE},
+      Balance = #{record.balance,jdbcType=DOUBLE},
+      Memo = #{record.memo,jdbcType=VARCHAR},
+      CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      UpdateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      DetailType = #{record.detailtype,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.home.open.bean.Accountdetailinfo">
+    update accountdetailinfo
+    <set>
+      <if test="userid != null">
+        UserID = #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="bankcardid != null">
+        BankCardID = #{bankcardid,jdbcType=BIGINT},
+      </if>
+      <if test="serialnumber != null">
+        SerialNumber = #{serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="contractid != null">
+        ContractID = #{contractid,jdbcType=BIGINT},
+      </if>
+      <if test="spendingmoney != null">
+        SpendingMoney = #{spendingmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="depositedmoney != null">
+        DepositedMoney = #{depositedmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="balance != null">
+        Balance = #{balance,jdbcType=DOUBLE},
+      </if>
+      <if test="memo != null">
+        Memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="detailtype != null">
+        DetailType = #{detailtype,jdbcType=BIGINT},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.home.open.bean.Accountdetailinfo">
+    update accountdetailinfo
+    set UserID = #{userid,jdbcType=BIGINT},
+      BankCardID = #{bankcardid,jdbcType=BIGINT},
+      SerialNumber = #{serialnumber,jdbcType=VARCHAR},
+      ContractID = #{contractid,jdbcType=BIGINT},
+      SpendingMoney = #{spendingmoney,jdbcType=DOUBLE},
+      DepositedMoney = #{depositedmoney,jdbcType=DOUBLE},
+      Balance = #{balance,jdbcType=DOUBLE},
+      Memo = #{memo,jdbcType=VARCHAR},
+      CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+      DetailType = #{detailtype,jdbcType=BIGINT}
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="org.home.open.bean.Accountdetailinfo">
+    <id column="Id" jdbcType="BIGINT" property="id" />
+    <result column="UserID" jdbcType="BIGINT" property="userid" />
+    <result column="BankCardID" jdbcType="BIGINT" property="bankcardid" />
+    <result column="SerialNumber" jdbcType="VARCHAR" property="serialnumber" />
+    <result column="ContractID" jdbcType="BIGINT" property="contractid" />
+    <result column="SpendingMoney" jdbcType="DOUBLE" property="spendingmoney" />
+    <result column="DepositedMoney" jdbcType="DOUBLE" property="depositedmoney" />
+    <result column="Balance" jdbcType="DOUBLE" property="balance" />
+    <result column="Memo" jdbcType="VARCHAR" property="memo" />
+    <result column="CreateTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="UpdateTime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="DetailType" jdbcType="BIGINT" property="detailtype" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    Id, UserID, BankCardID, SerialNumber, ContractID, SpendingMoney, DepositedMoney, 
+    Balance, Memo, CreateTime, UpdateTime, DetailType
+  </sql>
+  <select id="selectByExample" parameterType="org.home.open.bean.AccountdetailinfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from accountdetailinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from accountdetailinfo
+    where Id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from accountdetailinfo
+    where Id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.home.open.bean.AccountdetailinfoExample">
+    delete from accountdetailinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.home.open.bean.Accountdetailinfo">
+    insert into accountdetailinfo (Id, UserID, BankCardID, 
+      SerialNumber, ContractID, SpendingMoney, 
+      DepositedMoney, Balance, Memo, 
+      CreateTime, UpdateTime, DetailType
+      )
+    values (#{id,jdbcType=BIGINT}, #{userid,jdbcType=BIGINT}, #{bankcardid,jdbcType=BIGINT}, 
+      #{serialnumber,jdbcType=VARCHAR}, #{contractid,jdbcType=BIGINT}, #{spendingmoney,jdbcType=DOUBLE}, 
+      #{depositedmoney,jdbcType=DOUBLE}, #{balance,jdbcType=DOUBLE}, #{memo,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{detailtype,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.home.open.bean.Accountdetailinfo">
+    insert into accountdetailinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="userid != null">
+        UserID,
+      </if>
+      <if test="bankcardid != null">
+        BankCardID,
+      </if>
+      <if test="serialnumber != null">
+        SerialNumber,
+      </if>
+      <if test="contractid != null">
+        ContractID,
+      </if>
+      <if test="spendingmoney != null">
+        SpendingMoney,
+      </if>
+      <if test="depositedmoney != null">
+        DepositedMoney,
+      </if>
+      <if test="balance != null">
+        Balance,
+      </if>
+      <if test="memo != null">
+        Memo,
+      </if>
+      <if test="createtime != null">
+        CreateTime,
+      </if>
+      <if test="updatetime != null">
+        UpdateTime,
+      </if>
+      <if test="detailtype != null">
+        DetailType,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="bankcardid != null">
+        #{bankcardid,jdbcType=BIGINT},
+      </if>
+      <if test="serialnumber != null">
+        #{serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="contractid != null">
+        #{contractid,jdbcType=BIGINT},
+      </if>
+      <if test="spendingmoney != null">
+        #{spendingmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="depositedmoney != null">
+        #{depositedmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="balance != null">
+        #{balance,jdbcType=DOUBLE},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="detailtype != null">
+        #{detailtype,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.home.open.bean.AccountdetailinfoExample" resultType="java.lang.Long">
+    select count(*) from accountdetailinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update accountdetailinfo
+    <set>
+      <if test="record.id != null">
+        Id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.userid != null">
+        UserID = #{record.userid,jdbcType=BIGINT},
+      </if>
+      <if test="record.bankcardid != null">
+        BankCardID = #{record.bankcardid,jdbcType=BIGINT},
+      </if>
+      <if test="record.serialnumber != null">
+        SerialNumber = #{record.serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractid != null">
+        ContractID = #{record.contractid,jdbcType=BIGINT},
+      </if>
+      <if test="record.spendingmoney != null">
+        SpendingMoney = #{record.spendingmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.depositedmoney != null">
+        DepositedMoney = #{record.depositedmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.balance != null">
+        Balance = #{record.balance,jdbcType=DOUBLE},
+      </if>
+      <if test="record.memo != null">
+        Memo = #{record.memo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null">
+        CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatetime != null">
+        UpdateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.detailtype != null">
+        DetailType = #{record.detailtype,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update accountdetailinfo
+    set Id = #{record.id,jdbcType=BIGINT},
+      UserID = #{record.userid,jdbcType=BIGINT},
+      BankCardID = #{record.bankcardid,jdbcType=BIGINT},
+      SerialNumber = #{record.serialnumber,jdbcType=VARCHAR},
+      ContractID = #{record.contractid,jdbcType=BIGINT},
+      SpendingMoney = #{record.spendingmoney,jdbcType=DOUBLE},
+      DepositedMoney = #{record.depositedmoney,jdbcType=DOUBLE},
+      Balance = #{record.balance,jdbcType=DOUBLE},
+      Memo = #{record.memo,jdbcType=VARCHAR},
+      CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      UpdateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      DetailType = #{record.detailtype,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.home.open.bean.Accountdetailinfo">
+    update accountdetailinfo
+    <set>
+      <if test="userid != null">
+        UserID = #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="bankcardid != null">
+        BankCardID = #{bankcardid,jdbcType=BIGINT},
+      </if>
+      <if test="serialnumber != null">
+        SerialNumber = #{serialnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="contractid != null">
+        ContractID = #{contractid,jdbcType=BIGINT},
+      </if>
+      <if test="spendingmoney != null">
+        SpendingMoney = #{spendingmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="depositedmoney != null">
+        DepositedMoney = #{depositedmoney,jdbcType=DOUBLE},
+      </if>
+      <if test="balance != null">
+        Balance = #{balance,jdbcType=DOUBLE},
+      </if>
+      <if test="memo != null">
+        Memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="detailtype != null">
+        DetailType = #{detailtype,jdbcType=BIGINT},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.home.open.bean.Accountdetailinfo">
+    update accountdetailinfo
+    set UserID = #{userid,jdbcType=BIGINT},
+      BankCardID = #{bankcardid,jdbcType=BIGINT},
+      SerialNumber = #{serialnumber,jdbcType=VARCHAR},
+      ContractID = #{contractid,jdbcType=BIGINT},
+      SpendingMoney = #{spendingmoney,jdbcType=DOUBLE},
+      DepositedMoney = #{depositedmoney,jdbcType=DOUBLE},
+      Balance = #{balance,jdbcType=DOUBLE},
+      Memo = #{memo,jdbcType=VARCHAR},
+      CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+      DetailType = #{detailtype,jdbcType=BIGINT}
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

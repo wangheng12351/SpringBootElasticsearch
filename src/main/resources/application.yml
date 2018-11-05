@@ -1,0 +1,44 @@
+server:
+   port: 6088
+   servlet:
+     context-path: /SpringBootElasticsearch
+spring:
+   mvc:
+      static-path-pattern: /**
+      # 默认值为 classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
+      view:
+         prefix: /WEB-INF/views/
+         suffix: .jsp
+   datasource:
+      url: jdbc:mysql://192.168.1.186:3306/home_platform_background?characterEncoding=utf8
+      username: root
+      password: kaixinjiuhao
+      driver-class-name: com.mysql.jdbc.Driver
+   jpa:
+      hibernate:
+      ddl-auto: update
+#es相关配置
+es:
+ url: 192.168.1.145
+ port: 9300
+ clustername: TEST-ES
+#log4配置
+logging:
+ file: ./log/spring.log
+ path: ./log/
+ level: 
+  org.home.open: INFO
+#ssdb配置  Connection Pool Param
+ssdb:
+  host1: 60.205.104.167
+  port1: 8888
+  host2: 192.168.1.186
+  port2: 8889
+  #password: admin
+  #拉取未知号码状态的时间控制
+  socketTimeout: 30000
+  minIdle: 5
+  maxIdle: 10
+  poolMaxTotal: 10
+  begintime: 19
+  endtime: 21
