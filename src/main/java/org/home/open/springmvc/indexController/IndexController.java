@@ -26,6 +26,7 @@ public class IndexController {
         return "historyQuery";
     }
     //测试一下
+    
     @RequestMapping("/index")
     public String index(Model model) {
         return "index";
