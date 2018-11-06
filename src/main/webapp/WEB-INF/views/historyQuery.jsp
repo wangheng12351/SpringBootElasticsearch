@@ -14,13 +14,28 @@
 	src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+<script src="/SpringBootElasticsearch/laydate/laydate.js"></script>
+<script type="text/javascript">
+laydate.render({
+	  elem: '#endsubmittime' //指定元素
+		  ,type: 'datetime'
+	});
+laydate.render({
+	  elem: '#beginsubmittime' //指定元素
+		  ,type: 'datetime'
+	});
+</script>
 	<form role="form" style="width: 700px;">
 		<div class="form-group" align="center">
-			<label for="channelid">通道ID <input type="text"
-				class="form-control" id="channelId" placeholder="请输入通道ID(必输)"
-				required="required"></label> <br> <input type="button"
-				class="btn btn-primary" id="submit" value="查询未知状态号码"> <input
-				type="button" class="btn btn-primary" id="fan" value="返回首页">
+			<label for="channelid">通道ID 
+			<input type="text" class="form-control" id="channelId" placeholder="请输入通道ID(必输)" required="required"></label> 
+			<label for="beginsubmittime">开始时间
+			<input type="text" class="form-control" id="beginsubmittime" placeholder="请输入开始时间" required="required"></label>
+		    <label for="endsubmittime">结束时间
+		    <input type="text" class="form-control" id="endsubmittime" placeholder="请输入结束时间" required="required"></label>
+			<br> 
+			<input type="button" class="btn btn-primary" id="submit" value="查询未知状态号码"> 
+			<input type="button" class="btn btn-primary" id="fan" value="返回首页">
 		</div>
 		<div class="container" align="left">
 			<table class="table">
@@ -48,7 +63,7 @@ $(function() {
 	    });
     $("#submit").click(function(){
     	var channelId=$("#channelId").val();
-    	$.ajax({url:"/SpringBootElasticsearch/listHist?channelId="+channelId,
+    	$.ajax({url:"/SpringBootElasticsearch/listHist?channelId="+channelId+"&beginsubmittime="+beginsubmittime+"&endsubmittime="+endsubmittime,
     			success:function(result){
     				var tbody=$("#tbody").html("");
     	    		if(result!=null){
