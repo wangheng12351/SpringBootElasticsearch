@@ -16,8 +16,8 @@ import org.springframework.stereotype.Component;
 @Mapper
 public interface HistoryMapper {
 
-    @Select("SELECT * FROM historymtinfotmp where channelId=#{channelId} order by createTime desc limit 100")
-    List<HistoryMTInfo> findById(Long channelId);
+    @Select("SELECT * FROM historymtinfotmp where channelId=#{channelId} and submitTime between #{submitTimeBegin} and #{submitTimeEnd}  order by createTime desc limit 100")
+    List<HistoryMTInfo> findById(Long channelId,String submitTimeBegin,String submitTimeEnd);
     
     @Insert("INSERT INTO historymtinfotmp (SmsID,PackID,PacksID,SeqId,DataSrc,ServiceCode,ServiceCodeAdd,SmsContent,SubmitTime,Number,SchTime,UserPri,Pri,Status,ChannelID,OperatorType,UserID,OperatorUserID,SerialNumber,Memo,GetDataTempId,PkNumber,PkTotal,Rundom,UserPrice,ChannelPrice,PlatformProfit,OrderId,CreateTime,UpdateTime) VALUES (#{smsID}, #{packID}, #{packsID}, #{seqId}, #{dataSrc}, #{serviceCode},#{serviceCodeAdd}, #{smsContent}, #{submitTime}, #{number},#{schTime}, #{userPri}, #{pri}, #{status}, #{channelID}, #{operatorType},#{userID}, #{operatorUserID}, #{serialNumber}, #{memo}, #{getDataTempId},#{pkNumber}, #{pkTotal}, #{rundom}, #{userPrice}, #{channelPrice}, #{platformProfit},#{orderId},#{createTime},#{updateTime})")
     int insert(HistoryMTInfo stu);

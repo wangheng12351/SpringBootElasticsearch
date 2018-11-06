@@ -26,8 +26,11 @@ public class HisttoryController {
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
 	@GetMapping("/listHist")
-    public ResponseEntity listHist(@RequestParam(name = "channelId", defaultValue = "", required = true) Long channelId) {
-        List<HistoryMTInfo> HistoryMTInfo = historyMapper.findById(channelId);
+    public ResponseEntity listHist(@RequestParam(name = "channelId", defaultValue = "", required = true) Long channelId,
+    		@RequestParam(name = "beginsubmittime", defaultValue = "", required = true) String beginsubmittime,
+    		@RequestParam(name = "endsubmittime", defaultValue = "", required = true) String endsubmittime
+    		) {
+        List<HistoryMTInfo> HistoryMTInfo = historyMapper.findById(channelId,beginsubmittime,endsubmittime);
         return new ResponseEntity(JSON.toJSONString(HistoryMTInfo), HttpStatus.OK);
     }
     @RequestMapping("/insertHist")
