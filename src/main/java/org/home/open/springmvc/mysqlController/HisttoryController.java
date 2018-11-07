@@ -30,7 +30,11 @@ public class HisttoryController {
     		@RequestParam(name = "beginsubmittime", defaultValue = "", required = true) String beginsubmittime,
     		@RequestParam(name = "endsubmittime", defaultValue = "", required = true) String endsubmittime
     		) {
-        List<HistoryMTInfo> HistoryMTInfo = historyMapper.findById(channelId,beginsubmittime,endsubmittime);
+    	 List<HistoryMTInfo> HistoryMTInfo = new ArrayList<HistoryMTInfo>();
+    	if (channelId != null) {
+    		HistoryMTInfo = historyMapper.findByIdandSubmitTime(channelId,beginsubmittime,endsubmittime);
+		}
+    	
         return new ResponseEntity(JSON.toJSONString(HistoryMTInfo), HttpStatus.OK);
     }
     @RequestMapping("/insertHist")

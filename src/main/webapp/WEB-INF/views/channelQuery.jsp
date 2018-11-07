@@ -62,7 +62,9 @@ $(function() {
     	var channelid=$("#channelid").val();
     	var beginsubmittime=$("#beginsubmittime").val();
     	var endsubmittime=$("#endsubmittime").val();
-    	$.ajax({url:"/SpringBootElasticsearch/channelStatusTerms?channelid="+channelid+"&beginsubmittime="+beginsubmittime+"&endsubmittime="+endsubmittime,
+    	$.ajax({url:"/SpringBootElasticsearch/channelStatusTerms",
+    			type: 'POST',
+    			data:"channelid="+channelid+"&beginsubmittime="+beginsubmittime+"&endsubmittime="+endsubmittime,
     			success:function(result){
 	    		var tbody=$("#tbody").html("");
 	    		if(result!=null){
@@ -72,7 +74,7 @@ $(function() {
 	       			  continue;
 	       			var tr = $("<tr class=\"info\"></tr>");
 	       	        //赋值
-	       	        tr.html('<td>'+item+'</td><td>'+result[item]+'</td>');
+	       	        tr.html('<td>'+result[item].statusName+'</td><td>'+result[item].count+'</td>');
 	       	        //在房间tbody中
 	       	        $("#tbody").append(tr);
 	       	       }
@@ -84,7 +86,9 @@ $(function() {
     	var channelid=$("#channelid").val();
     	var beginsubmittime=$("#beginsubmittime").val();
     	var endsubmittime=$("#endsubmittime").val();
-    	$.ajax({url:"/SpringBootElasticsearch/channelStatisNew?channelid="+channelid+"&beginsubmittime="+beginsubmittime+"&endsubmittime="+endsubmittime,
+    	$.ajax({url:"/SpringBootElasticsearch/channelStatisNew",
+    			type: 'POST',
+    			data:"channelid="+channelid+"&beginsubmittime="+beginsubmittime+"&endsubmittime="+endsubmittime,
     			success:function(result){
 	    		var tbody=$("#tbody").html("");
 	    		if(result!=null){

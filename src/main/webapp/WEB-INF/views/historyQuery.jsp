@@ -29,8 +29,10 @@ laydate.render({
 		<div class="form-group" align="center">
 			<label for="channelid">通道ID 
 			<input type="text" class="form-control" id="channelId" placeholder="请输入通道ID(必输)" required="required"></label> 
+			<br> 
 			<label for="beginsubmittime">开始时间
 			<input type="text" class="form-control" id="beginsubmittime" placeholder="请输入开始时间" required="required"></label>
+			<br> 
 		    <label for="endsubmittime">结束时间
 		    <input type="text" class="form-control" id="endsubmittime" placeholder="请输入结束时间" required="required"></label>
 			<br> 
@@ -63,6 +65,8 @@ $(function() {
 	    });
     $("#submit").click(function(){
     	var channelId=$("#channelId").val();
+    	var beginsubmittime=$("#beginsubmittime").val();
+    	var endsubmittime=$("#endsubmittime").val();
     	$.ajax({url:"/SpringBootElasticsearch/listHist?channelId="+channelId+"&beginsubmittime="+beginsubmittime+"&endsubmittime="+endsubmittime,
     			success:function(result){
     				var tbody=$("#tbody").html("");

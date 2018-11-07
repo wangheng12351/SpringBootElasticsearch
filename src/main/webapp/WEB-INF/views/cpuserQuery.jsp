@@ -60,9 +60,12 @@ $(function() {
     	var servicecode=$("#servicecode").val();
     	var beginsubmittime=$("#beginsubmittime").val();
     	var endsubmittime=$("#endsubmittime").val();
-    	$.ajax({url:"/SpringBootElasticsearch/cpuserStatusTerms?servicecode="+servicecode+"&beginsubmittime="+beginsubmittime+"&endsubmittime="+endsubmittime,
+    	$.ajax({url:"/SpringBootElasticsearch/cpuserStatusTerms",
+    			type: 'POST',
+    			data:"servicecode="+servicecode+"&beginsubmittime="+beginsubmittime+"&endsubmittime="+endsubmittime,
     			success:function(result){
 	    		var tbody=$("#tbody").html("");
+	    		console.log(result);
 	    		if(result!=null){
 	    			for(var item in result){
 	       			 //遍历pp对象中的属性，只显示出 非函数的 属性，注意不能 遍历 p这个类
@@ -70,7 +73,8 @@ $(function() {
 	       			  continue;
 	       			var tr = $("<tr class=\"info\"></tr>");
 	       	        //赋值
-	       	        tr.html('<td>'+item+'</td><td>'+result[item]+'</td>');
+	       	      
+	       	        tr.html('<td>'+result[item].statusName+'</td><td>'+result[item].count+'</td>');
 	       	        //在房间tbody中
 	       	        $("#tbody").append(tr);
 	       	       }
@@ -82,7 +86,9 @@ $(function() {
     	var servicecode=$("#servicecode").val();
     	var beginsubmittime=$("#beginsubmittime").val();
     	var endsubmittime=$("#endsubmittime").val();
-    	$.ajax({url:"/SpringBootElasticsearch/cpUserStatisNew?servicecode="+servicecode+"&beginsubmittime="+beginsubmittime+"&endsubmittime="+endsubmittime,
+    	$.ajax({url:"/SpringBootElasticsearch/cpUserStatisNew",
+    			type: 'POST',
+    			data:"servicecode="+servicecode+"&beginsubmittime="+beginsubmittime+"&endsubmittime="+endsubmittime,
     			success:function(result){
 	    		var tbody=$("#tbody").html("");
 	    		if(result!=null){
