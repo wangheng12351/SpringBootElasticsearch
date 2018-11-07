@@ -19,7 +19,7 @@ spring:
       ddl-auto: update
 #es相关配置
 es:
- url: 192.168.1.145
+ url: 192.168.1.186
  port: 9300
  clustername: TEST-ES
 #log4配置
@@ -30,7 +30,7 @@ logging:
   org.home.open: INFO
 #ssdb配置  Connection Pool Param
 ssdb:
-  host1: 60.205.104.167
+  host1: 192.168.1.186
   port1: 8888
   host2: 192.168.1.186
   port2: 8889
